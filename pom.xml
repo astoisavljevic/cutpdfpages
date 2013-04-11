@@ -5,11 +5,28 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
+  	<org.slf4j.version>1.7.5</org.slf4j.version>
+  	<ch.qos.logback.version>1.0.11</ch.qos.logback.version>
   	<com.itextpdf.version>5.4.0</com.itextpdf.version>
   </properties>
   
   <dependencyManagement>
   	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${ch.qos.logback.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
@@ -19,6 +36,18 @@
   </dependencyManagement>
   
   <dependencies>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+	</dependency>
   	<dependency>
 		<groupId>com.itextpdf</groupId>
 		<artifactId>itextpdf</artifactId>
@@ -34,6 +63,11 @@
   				<artifactId>maven-compiler-plugin</artifactId>
   				<version>3.1</version>
   			</plugin>
+  			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-jar-plugin</artifactId>  			
+  				<version>2.4</version>
+  			</plugin>
   		</plugins>
   	</pluginManagement>
   	<plugins>
@@ -46,6 +80,19 @@
 				<encoding>UTF-8</encoding>
 			</configuration>  			
   		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<classpathPrefix>lib/</classpathPrefix>
+						<mainClass>rs.in.staleksit.cutpdfpages.main.MainClass</mainClass>
+					</manifest>
+				</archive>
+			</configuration>  			
+		</plugin>
   	</plugins>
   </build>
   

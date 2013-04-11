@@ -7,6 +7,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
@@ -19,17 +22,28 @@ import com.itextpdf.text.pdf.RandomAccessFileOrArray;
  *
  */
 public class MainClass {
+	
+	private static final Logger log = LoggerFactory.getLogger(MainClass.class);
 
 	/**
 	 * @param args
 	 * 
 	 */
 	public static void main(String[] args) {
-		if (args.length != 3) {
+		if (log.isDebugEnabled()) {
+			log.debug("-+- main() method started -+-");
+			log.debug("-+- params -+-");
+			for (String item: args) {
+				log.debug("param: {}", item);
+			}
+		}
+		if (args.length == 3) {
 			MainClass mainClass = new MainClass();
-			// mainClass.removePdfPage(args[0], args[1], true, Integer.valueOf(args[2]));
-			mainClass.removePdfPage("SenchaTouch.pdf", "SenchaTouchNew.pdf", true, 1);
+			mainClass.removePdfPage(args[0], args[1], true, Integer.valueOf(args[2]));
 		} else {
+			if (log.isDebugEnabled()) {
+				log.debug("-+- not enough parameters -+-");
+			}
 			System.out.println("Usage cutpdfpages <infilename> <outfilename> <pagetocut>");
 		}
 	}
@@ -55,8 +69,6 @@ public class MainClass {
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
                 //write the content to an output stream
                 bs.write(bContent);
-                
-                System.out.println("page content length " + bs.size());
                 
                 // skip adding designated page
                 if (i != pageToDelete) {
