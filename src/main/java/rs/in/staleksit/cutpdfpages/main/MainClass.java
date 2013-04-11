@@ -41,9 +41,6 @@ public class MainClass {
 			MainClass mainClass = new MainClass();
 			mainClass.removePdfPage(args[0], args[1], true, Integer.valueOf(args[2]));
 		} else {
-			if (log.isDebugEnabled()) {
-				log.debug("-+- not enough parameters -+-");
-			}
 			System.out.println("Usage cutpdfpages <infilename> <outfilename> <pagetocut>");
 		}
 	}
