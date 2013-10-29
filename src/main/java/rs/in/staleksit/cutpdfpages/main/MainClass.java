@@ -22,17 +22,11 @@ import com.itextpdf.text.pdf.RandomAccessFileOrArray;
  *
  */
 public class MainClass {
-	
 	private static final Logger log = LoggerFactory.getLogger(MainClass.class);
 
-	/**
-	 * @param args
-	 * 
-	 */
 	public static void main(String[] args) {
 		if (log.isDebugEnabled()) {
 			log.debug("-+- main() method started -+-");
-			log.debug("-+- params -+-");
 			for (String item: args) {
 				log.debug("param: {}", item);
 			}
@@ -45,9 +39,7 @@ public class MainClass {
 		}
 	}
 	
-	
 	public void removePdfPage(String pdfSourceFile, String pdfDestinationFile, boolean debug, int pageToDelete) {
-		
 		try {
 			PdfReader r = new PdfReader(pdfSourceFile);
 			// consider what to use instead
